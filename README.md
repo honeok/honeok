@@ -1,14 +1,13 @@
-<!-- GitHub用户主页，展示编程语言统计图 -->
-<a href="https://github.com/honeok">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=honeok&theme=prussian&layout=compact&hide=handlebars,css" alt="top-langs">
-</a>
+### Hi there 👋
 
-<div style="display: flex; justify-content: space-between; gap: 4%; width: 100%;">
-  <!-- 个人统计图（贡献、提交等） -->
-  <img src="https://github-readme-stats.vercel.app/api?username=honeok&theme=default&hide_border=false&include_all_commits=false&count_private=false&show_icons=true" alt="GitHub Star" style="max-width: 48%;">
+<!-- 显示GitHub统计信息和编程语言统计 -->
+<div style="display: flex; gap: 10px;">
+  <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img src="https://github-readme-stats.vercel.app/api?username=honeok&theme=aura&count_private=true&hide=contribs&show_icons=true&include_all_commits=true&line_height=24.0" alt="GitHub stats" style="max-width: 48%; height: auto;">
+  </a>
 
-  <!-- GitHub 连续提交 streak 状态图，展示提交连续性 -->
-  <a href="https://git.io/streak-stats">
-    <img src="https://streak-stats.demolab.com/?user=honeok&card_width=360&hide_current_streak=true" alt="GitHub Streak" style="max-width: 48%;">
+  <!-- 显示编程语言统计 -->
+  <a href="https://github.com/honeok">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=honeok&theme=aura&layout=compact&card_width=360&exclude_repo=qdan-res,qdan-static" alt="Top Langs" style="max-width: 48%; height: auto;">
   </a>
 </div>
