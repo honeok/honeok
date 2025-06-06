@@ -32,5 +32,6 @@ jobs:
         with:
           target_branch: output
           build_dir: dist
+          commit_message: 'chore: synchronize snake svg commit graph'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
