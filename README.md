@@ -7,6 +7,11 @@ _"The river does not rush to be first, but strives to flow endlessly."_
 
 <!-- prettier-ignore-start -->
 <!-- feed start -->
+- 27 May 2026 - [NanoPi R3S安装armbian设置mihomo旁路由](https://blog.honeok.com/120.html)
+- 31 Dec 2025 - [写在2025年末](https://blog.honeok.com/115.html)
+- 19 Dec 2025 - [Gemini 聊天报错解决方法，新谷歌号提示出了点问题解决方法](https://blog.honeok.com/106.html)
+- 15 Nov 2025 - [Ubuntu 22.10及以上版本修改SSH端口](https://blog.honeok.com/72.html)
+- 06 Nov 2025 - [迥异尘嚣 内江一瞬](https://blog.honeok.com/68.html)
 <!-- feed end -->
 
 <!-- prettier-ignore-end -->
