@@ -3,8 +3,7 @@ name: "GitHub Actions Mirror"
 
 on:
   push:
-    branches:
-      - master
+    branches: ["master"]
   workflow_dispatch:
 
 jobs:
