@@ -25,6 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Update license"
+        id: license
         uses: FantasticFiasco/action-update-license-year@v3
         with:
           token: ${{ github.token }}
@@ -34,3 +35,10 @@ jobs:
           commitAuthorEmail: "41898282+github-actions[bot]@users.noreply.github.com"
           prTitle: "docs(license): update license year to {{currentYear}}"
           labels: "documentation"
+
+      - name: "Approve and auto merge"
+        if: steps.license.outputs.pullRequestNumber != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUM: ${{ steps.license.outputs.pullRequestNumber }}
+        run: gh pr merge --squash --auto --delete-branch "$PR_NUM"
