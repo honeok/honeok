@@ -1,0 +1,50 @@
+---
+name: "Update blog posts"
+
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: "Update blog posts"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "Update readme feed"
+        id: feed
+        uses: sarisia/actions-readme-feed@v1
+        with:
+          url: "https://blog.honeok.com/feed/"
+          file: "README.md"
+          sort: true
+          max_entry: 5
+          format: "- ${02day} ${monthshort} ${year} - [${title}](${url})"
+          start_flag: "<!-- feed start -->"
+          end_flag: "<!-- feed end -->"
+          timezone: UTC
+          retry: 5
+          retry_backoff: 30
+          ensure_all: false
+          allow_empty: false
+
+      - name: "Upload commit to repository"
+        if: ${{ steps.feed.outputs.changed == '1' }}
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "docs: update readme blog feed [skip ci]"
+          commit_options: "--no-verify --signoff"
+          file_pattern: "README.md"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
