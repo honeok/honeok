@@ -15,6 +15,7 @@ jobs:
     name: "Update blog posts"
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       contents: write
 
     steps:
@@ -39,7 +40,7 @@ jobs:
           allow_empty: false
 
       - name: "Upload commit to repository"
-        if: ${{ steps.feed.outputs.changed == '1' }}
+        if: steps.feed.outputs.changed == '1'
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "docs: update readme blog posts"
@@ -48,3 +49,9 @@ jobs:
           commit_user_name: "github-actions[bot]"
           commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+
+      - name: "Sync mirror repositories"
+        if: steps.feed.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run mirror.yml --ref ${{ github.event.repository.default_branch }}
