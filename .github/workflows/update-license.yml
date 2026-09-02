@@ -10,6 +10,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   update:
     name: "Update license"
@@ -30,10 +33,10 @@ jobs:
         with:
           token: ${{ github.token }}
           path: "LICENSE"
-          commitTitle: "docs(license): update license year to {{currentYear}}"
+          commitTitle: "docs: update license year to {{currentYear}}"
           commitAuthorName: "github-actions[bot]"
           commitAuthorEmail: "41898282+github-actions[bot]@users.noreply.github.com"
-          prTitle: "docs(license): update license year to {{currentYear}}"
+          prTitle: "docs: update license year to {{currentYear}}"
           labels: "documentation"
 
       - name: "Approve and auto merge"
