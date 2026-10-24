@@ -1,0 +1,57 @@
+---
+name: "Update readme cards"
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+      timezone: "Asia/Shanghai"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: "Update readme cards"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v6
+
+      - name: "Generate stats card"
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: "username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&hide_border=true&hide=contribs&theme=default&icon_color=0366d6&title_color=0366d6"
+          path: dist/stats.svg
+          token: ${{ github.token }}
+          fail_on_error: true
+
+      - name: "Generate top languages card"
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: top-langs
+          options: "username=${{ github.repository_owner }}&layout=compact&hide_border=true&hide=javascript,html,css&theme=default&icon_color=0366d6&title_color=0366d6"
+          path: dist/top-langs.svg
+          token: ${{ github.token }}
+          fail_on_error: true
+
+      - name: "Commit cards"
+        run: |
+          set -eEuo pipefail
+          cd dist
+          git init -b dist
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -sm "chore: update readme cards"
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}"
+          git push -f origin dist

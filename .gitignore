@@ -1,4 +1,10 @@
-.agents
-.codex
-.idea
-.vscode
+# editors and ides
+.idea/
+.vscode/
+*.swp
+
+# agents
+.agents/
+.codex/
+*.code-workspace/
+.codex-workflows/
